@@ -1,0 +1,12 @@
+[Unit]
+Description=Timetablebot Service
+
+[Service]
+Type=simple
+User=timetablebot
+WorkingDirectory=/home/timetablebot/
+ExecStart=/usr/bin/java -jar TimetableBot.jar
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

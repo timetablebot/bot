@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%highlight{%level}] %c{1} - %msg%n"/>
+        </Console>
+        <Console name="ConsoleError" target="SYSTEM_ERR">
+            <PatternLayout pattern="[%highlight{%level}] %c{1} - %msg%n"/>
+        </Console>
+        <!-- <File name="StandardFile" fileName="logs/std.log">
+            <PatternLayout>
+                <pattern>%d{dd MMM yyyy HH:mm:ss} [%level] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+        </File> -->
+        <File name="SentFile" fileName="logs/sent.log">
+            <PatternLayout>
+                <pattern>%d{dd MMM yyyy HH:mm:ss} [%level] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+        </File>
+        <RollingFile name="StandardFile" fileName="logs/std.log" filePattern="logs/std-%d{dd-MM-yyyy}.log">
+            <PatternLayout>
+                <pattern>%d{dd MMM yyyy HH:mm:ss} [%level] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="StandardFile"/>
+        </Root>
+        <Logger name="de.lukweb.timetablebot" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="StandardFile"/>
+        </Logger>
+        <Logger name="de.lukweb.timetablebot.telegram.MessagesSent" additivity="false">
+            <AppenderRef ref="SentFile"/>
+        </Logger>
+        <Logger name="de.lukweb.timetablebot.utils.CatchingThreadFactory" additivity="false">
+            <AppenderRef ref="ConsoleError"/>
+            <AppenderRef ref="StandardFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>
