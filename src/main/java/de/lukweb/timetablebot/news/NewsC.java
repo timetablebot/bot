@@ -23,9 +23,9 @@ public class NewsC extends TelegramCommand {
     private String getDayDescription(TimetableDay day) {
         switch (day) {
             case TODAY:
-                return "Heutige Nachrichten";
+                return "Nachrichten für Heute";
             case TOMORROW:
-                return "Morgige Nachrichten";
+                return "Nachrichten für Morgen";
             default:
                 return "";
         }
