@@ -185,6 +185,7 @@ public class UserSetup {
     }
 
     private List<List<String>> generateTeacherLists() {
+        // TODO: Problem when there are no teachers -> Try later again
         int elementsPerMessage = 99;
 
         // Fetching all teachers from the teachers table

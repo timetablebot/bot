@@ -136,7 +136,12 @@ public class ModuleLoader {
     }
 
     public void stopTasks() {
+        runnables.values().stream()
+                .filter(runnable -> runnable instanceof Stoppable)
+                .map(Stoppable.class::cast)
+                .forEach(Stoppable::stop);
         runnables.clear();
+
         for (BotModule module : modules) {
             module.stopScheduler();
         }

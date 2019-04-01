@@ -1,5 +1,6 @@
 package de.lukweb.timetablebot.timetable;
 
+import de.lukweb.timetablebot.Stoppable;
 import de.lukweb.timetablebot.config.TimetableBotConfig;
 import de.lukweb.timetablebot.sql.DB;
 import de.lukweb.timetablebot.telegram.TelegramRank;
@@ -19,7 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class TimetableRunnable implements Runnable {
+public class TimetableRunnable implements Runnable, Stoppable {
 
     private Logger logger;
     private TimetableBotConfig config;
@@ -119,6 +120,7 @@ public class TimetableRunnable implements Runnable {
         newAme.forEach(a -> telegramExecutorService.execute(() -> Users.notify(a, false)));
         // removedAme.forEach(a -> telegramExecutorService.execute(() -> Users.notify(a, true)));
 
+        // TODO: Only send the review message if the day is today or in the future
         // Send all removals to me for review
         removedAme.forEach(amendment -> telegramExecutorService.execute(() ->
                 amendment.sendRemove(Users.get(154988148))));
@@ -180,6 +182,7 @@ public class TimetableRunnable implements Runnable {
         return false;
     }
 
+    @Override
     public void stop() {
         sqlExecutorService.shutdown();
         telegramExecutorService.shutdown();

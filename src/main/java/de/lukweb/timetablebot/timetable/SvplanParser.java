@@ -31,6 +31,7 @@ public abstract class SvplanParser {
 
     protected Document requestHTML(String url) {
         try {
+            // TODO: Allow running without authoriziation
             // Using the custom request method, because the Jsoup.connect returns sometimes incomplete data ):
             URLConnection connection = new URL(url).openConnection();
             // Using the http basic authorization the string 'authorization' should be Base64 Encoded
