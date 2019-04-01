@@ -17,7 +17,8 @@ public enum AmendmentType {
     UNDEFINDED("Unbekannt"),
     SPECIAL_OPERATION("Sondereins.", "Sondereinsatz"),
     SHIFTING("Verlegung"),
-    WORKING_WITHOUT_TEACHER("freies Arbeiten");
+    WORKING_WITHOUT_TEACHER("freies Arbeiten"),
+    PRE_MARK("Vormerkung");
 
     private String tableName;
     private String fullName;
