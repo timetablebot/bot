@@ -1,9 +1,8 @@
 version: '3'
 services:
   ttbot:
-    #   build: .
-    #   image: timetablebot:jdk11
-    image: registry.gitlab.com/lukbukkit/timetable-bot
+    image: alsstundenplanbot/bot
+    restart: always
     volumes:
       - ./config/:/timetablebot/config
     depends_on:
