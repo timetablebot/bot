@@ -1,8 +1,9 @@
 package de.lukweb.timetablebot.utils;
 
+import org.jsoup.Jsoup;
+
 import java.io.IOException;
 import java.util.Base64;
-import org.jsoup.Jsoup;
 
 public class NetUtils {
 

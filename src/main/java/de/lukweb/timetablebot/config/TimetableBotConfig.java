@@ -26,7 +26,15 @@ public class TimetableBotConfig {
 
     public TimetableBotConfig() {
         logger = LoggerFactory.getLogger(getClass());
-        read(new File("config.ini"));
+
+        File configDir = new File("config");
+
+        if (configDir.exists()) {
+            File file = new File(configDir, "config.ini");
+            read(file);
+        } else {
+            read(new File("config.ini"));
+        }
     }
 
     private void read(File file) {

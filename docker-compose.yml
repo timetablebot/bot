@@ -1,0 +1,20 @@
+version: '3'
+services:
+  ttbot:
+    #   build: .
+    #   image: timetablebot:jdk11
+    #    image: registry.gitlab.com/lukbukkit/timetable-bot
+    volumes:
+      - ./dockercfg/:/timetablebot/config
+    depends_on:
+      - mariadb
+  mariadb:
+    image: mariadb
+    restart: always
+    volumes:
+      - database_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=abcdef1234
+      - MYSQL_DATABASE=timetablebot
+volumes:
+  database_data: {}
