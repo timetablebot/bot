@@ -17,7 +17,10 @@ public class TeachersSQL {
 
     public void addMissingTeachers(List<String> names) {
         PreparedBatch batch = handle.prepareBatch("INSERT IGNORE INTO teachers (name) VALUES (?)");
-        names.stream().map(String::toLowerCase).forEach(batch::add);
+        names.stream()
+                .filter(name -> !name.equals("") && !name.contains(","))
+                .map(String::toLowerCase)
+                .forEach(batch::add);
         if (batch.size() > 0) {
             batch.execute();
         }
