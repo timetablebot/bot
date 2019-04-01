@@ -1,10 +1,11 @@
 package de.lukweb.timetablebot.timetable.sql;
 
 import de.lukweb.timetablebot.telegram.TelegramUser;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.statement.PreparedBatch;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TeachersSQL {
 
@@ -24,7 +25,7 @@ public class TeachersSQL {
     }
 
     public List<String> getAll() {
-        return handle.select("SELECT `name` FROM teachers")
+        return handle.select("SELECT `name` FROM teachers WHERE name NOT LIKE '%,%' OR name LIKE ''")
                 .mapTo(String.class)
                 .stream()
                 .map(String::toUpperCase)

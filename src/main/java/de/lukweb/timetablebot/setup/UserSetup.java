@@ -5,7 +5,7 @@ import de.lukweb.timetablebot.TimetableBot;
 import de.lukweb.timetablebot.sql.DB;
 import de.lukweb.timetablebot.telegram.TelegramUser;
 import de.lukweb.timetablebot.timetable.TimetableRunnable;
-import de.lukweb.timetablebot.timetable.sql.AmendmentSQL;
+import de.lukweb.timetablebot.timetable.sql.TeachersSQL;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
@@ -188,10 +188,11 @@ public class UserSetup {
         int elementsPerMessage = 99;
 
         // Fetching all teachers from the teachers table
-        List<String> abbreviations = DB.get().withHandle(handle -> new AmendmentSQL(handle).getTeachers());
+        List<String> abbreviations = DB.get().withHandle(handle -> new TeachersSQL(handle).getAll());
 
         // Removing all teacher names which are too long or contain a plus
-        abbreviations.removeIf(teacher -> teacher.length() > 48 || teacher.contains("+"));
+        abbreviations.removeIf(teacher -> teacher.length() > 48 || teacher.contains("+") || teacher.contains(","));
+        abbreviations.remove("");
 
         return Lists.partition(abbreviations, elementsPerMessage);
     }
