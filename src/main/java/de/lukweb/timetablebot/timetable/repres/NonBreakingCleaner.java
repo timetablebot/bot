@@ -15,6 +15,9 @@ public class NonBreakingCleaner {
     }
 
     public static String clean(String string) {
-        return string.replace('\u00A0', ' ');
+        // Replacing invalid characters
+        return string.replace('\u00A0', ' ')
+                // This would cause a MySQL error
+                .replace("\uFFFD", "");
     }
 }

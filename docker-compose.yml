@@ -1,14 +1,17 @@
+# https://docs.docker.com/compose/compose-file/
 version: '3'
 services:
   ttbot:
-    image: alsstundenplanbot/bot
+    build: .
+    #    image: alsstundenplanbot/bot
     restart: always
     volumes:
       - ./config/:/timetablebot/config
     depends_on:
       - mariadb
   mariadb:
-    image: mariadb
+    # https://hub.docker.com/r/yobasystems/alpine-mariadb/
+    image: yobasystems/alpine-mariadb
     restart: always
     volumes:
       - database_data:/var/lib/mysql
@@ -17,5 +20,6 @@ services:
       - MYSQL_USER=timetablebot
       - MYSQL_PASSWORD=abcdef1234
       - MYSQL_DATABASE=timetablebot
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
 volumes:
   database_data: {}

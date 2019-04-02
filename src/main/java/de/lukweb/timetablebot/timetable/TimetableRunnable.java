@@ -37,7 +37,6 @@ public class TimetableRunnable implements Runnable, Stoppable {
         amendments = DB.get().withHandle(handle -> new AmendmentSQL(handle).getLastTwoDays());
         sqlExecutorService = Executors.newFixedThreadPool(2, new CatchingThreadFactory("mysql"));
         telegramExecutorService = Executors.newFixedThreadPool(2, new CatchingThreadFactory("telegram"));
-        // TODO: Why double call at the start?
     }
 
     public List<Amendment> getCachedAmendments() {
@@ -46,6 +45,7 @@ public class TimetableRunnable implements Runnable, Stoppable {
 
     @Override
     public void run() {
+        // TODO: Maybe ignore if day is before today
         List<Amendment> currAme = new TimetableParser(config).parse();
         List<Amendment> newAme = new ArrayList<>();
         List<Amendment> removedAme = new ArrayList<>();
