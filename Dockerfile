@@ -5,7 +5,7 @@
 FROM maven:3-jdk-12-alpine as maven
 WORKDIR /build/timetablebot/
 
-COPY src .
+COPY src ./src/
 COPY pom.xml .
 
 RUN mvn package

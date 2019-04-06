@@ -2,8 +2,9 @@
 version: '3'
 services:
   ttbot:
-    build: .
-    #    image: alsstundenplanbot/bot
+    # https://hub.docker.com/r/alsstundenplanbot/bot
+    # Use 'build: .' instead of 'image:...' if you want to test your local code changes
+    image: alsstundenplanbot/bot
     restart: always
     volumes:
       - ./config/:/timetablebot/config
