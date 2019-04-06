@@ -10,4 +10,4 @@ CONFIG_DIR=$(pwd)/dockercfg/
 docker run \
 	-d -i --name timetablebot \
 	--mount "type=bind,src=${CONFIG_DIR},dst=/timetablebot/config" \
-	timetablebot:jdk11
+	alsstundenplanbot/bot
