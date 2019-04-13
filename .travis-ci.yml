@@ -1,0 +1,30 @@
+# https://docs.travis-ci.com/user/languages/java/
+language: java
+jdk:
+  - oraclejdk11
+  - oraclejdk12
+  - openjdk11
+  - openjdk12
+
+# https://docs.travis-ci.com/user/job-lifecycle/#customizing-the-build-phase
+script:
+  - mvn package
+  - mvn dependency:copy-dependencies -DincludeScope=runtime -DexcludeGroupIds=org.glassfish
+  - mv target/*.jar target/timetablebot.jar
+  - tar -cvf build.tar target/timetablebot.jar target/dependency
+
+# https://docs.travis-ci.com/user/notifications/
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+# https://docs.travis-ci.com/user/deployment/releases/
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: build.tar
+  skip_cleanup: true
+  draft: true
+  on:
+    tags: true
