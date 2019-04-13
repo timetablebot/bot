@@ -4,7 +4,7 @@ services:
   ttbot:
     # https://hub.docker.com/r/alsstundenplanbot/bot
     # Use 'build: .' instead of 'image:...' if you want to test your local code changes
-    image: alsstundenplanbot/bot
+    image: timetablebot/bot
     restart: always
     volumes:
       - ./config/:/timetablebot/config
@@ -17,6 +17,9 @@ services:
     volumes:
       - database_data:/var/lib/mysql
     environment:
+      # WARNING: Change the passwords, if you open the port "3306"
+      # If you change the MYSQL_USER or MYSQL_PASSWORD or MYSQL_DATABASE,
+      # you also have to update the configuration file
       - MYSQL_ROOT_PASSWORD=abcdef1234
       - MYSQL_USER=timetablebot
       - MYSQL_PASSWORD=abcdef1234
