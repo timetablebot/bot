@@ -1,8 +1,9 @@
 # TimetableBot
 
 This application sends changes of your timetable as a [Telegram](https://telegram.org/) message.
-It works with [Untis](https://www.untis.at), but feel free to add more timetable providers.
-Currently all strings are hardcoded in German, but if you want, feel free to translations.
+
+It works with [Untis](https://www.untis.at) and currently all strings are hardcoded in German, 
+but feel free to change the software according to your needs.
 
 ## Installation
 
