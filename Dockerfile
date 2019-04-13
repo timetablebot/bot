@@ -2,13 +2,15 @@
 # https://docs.docker.com/develop/develop-images/multistage-build/
 
 # https://hub.docker.com/_/maven
-# Using a base image, so we don't have to download all maven libraires multiple times
+# Using a base image, so we don't have to download the maven libraries multiple times
 FROM maven:3-jdk-12-alpine as mavenBase
 WORKDIR /build/timetablebot/
 
 COPY pom.xml .
+# Downloading all maven plugins and dependencies
+RUN mvn dependency:go-offline
+# Building the application to download all maven core libraries
 RUN mvn package
-RUN mvn dependency:copy-dependencies
 
 # https://hub.docker.com/_/maven
 FROM maven:3-jdk-12-alpine as maven
