@@ -1,5 +1,6 @@
 package de.lukweb.timetablebot.setup;
 
+import de.lukweb.timetablebot.telegram.MessageCallback;
 import de.lukweb.timetablebot.telegram.TelegramBot;
 import de.lukweb.timetablebot.telegram.TelegramUser;
 import de.lukweb.timetablebot.telegram.commands.TelegramCommand;
@@ -19,7 +20,7 @@ public class GradeC extends TelegramCommand {
         store.handleNew(user, "");
 
         TelegramBot.get().setCallback(message.getChatId(), newMsg -> {
-            if (!newMsg.hasText()) return false;
+            if (!newMsg.hasText()) return MessageCallback.RESUME;
 
             SetupState state = store.handle(user, newMsg.getText());
             return state.equals(SetupState.FINISH) || state.equals(SetupState.INVAILD);

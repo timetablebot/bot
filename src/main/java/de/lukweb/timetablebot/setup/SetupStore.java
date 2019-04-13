@@ -31,6 +31,10 @@ public class SetupStore {
         return handle(user, text);
     }
 
+    public void abort(TelegramUser user) {
+        setups.remove(user);
+    }
+
     public SetupState handle(TelegramUser user, String text) {
         UserSetup setup = setups.get(user);
 

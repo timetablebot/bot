@@ -1,9 +1,6 @@
 package de.lukweb.timetablebot.telegram.communication;
 
-import de.lukweb.timetablebot.telegram.TelegramBot;
-import de.lukweb.timetablebot.telegram.TelegramRank;
-import de.lukweb.timetablebot.telegram.TelegramUser;
-import de.lukweb.timetablebot.telegram.Users;
+import de.lukweb.timetablebot.telegram.*;
 import de.lukweb.timetablebot.telegram.commands.TelegramCommand;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -58,14 +55,14 @@ public class MessageUserC extends TelegramCommand {
                 if (chatId >= 0) {
                     wantMessage(user, chatId);
                     // Allowing to change the callback
-                    return false;
+                    return MessageCallback.RESUME;
                 } else {
                     user.messages().send("Die Zahl muss größer gleich 0 sein!");
                 }
             } catch (NumberFormatException ex) {
                 user.messages().send("Du musst eine ganze Zahl eingeben!");
             }
-            return true;
+            return MessageCallback.FINISHED;
         });
     }
 
@@ -74,17 +71,17 @@ public class MessageUserC extends TelegramCommand {
         TelegramBot.get().setCallback(user.getChatid(), msgCallback -> {
             if (!msgCallback.hasText()) {
                 user.messages().send("Die Nachricht muss Text enthalten!");
-                return true;
+                return MessageCallback.FINISHED;
             }
 
             String toName = sendMessageTo(chatid, msgCallback.getText());
             if (toName == null) {
                 user.messages().send("Der Benutzer wurde nicht gefunden!");
-                return true;
+                return MessageCallback.FINISHED;
             }
 
             user.messages().send("Die Nachricht wurde an " + toName + " versendet!");
-            return true;
+            return MessageCallback.FINISHED;
         });
     }
 

@@ -1,8 +1,8 @@
 package de.lukweb.timetablebot.sql;
 
-import de.lukweb.timetablebot.timetable.sql.TeachersSQL;
 import de.lukweb.timetablebot.telegram.TelegramRank;
 import de.lukweb.timetablebot.telegram.TelegramUser;
+import de.lukweb.timetablebot.timetable.sql.TeachersSQL;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.mapper.RowMapper;
 
@@ -71,6 +71,10 @@ public class UsersSQL {
                 user.getChatid()
         );
         new TeachersSQL(handle).saveTeachers(user);
+    }
+
+    public void delete(TelegramUser user) {
+        handle.execute("DELETE FROM users WHERE chatid = ?", user.getChatid());
     }
 
     private String trimToLength(String string, int maxLength) {

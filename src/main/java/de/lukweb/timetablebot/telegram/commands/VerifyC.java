@@ -1,6 +1,7 @@
 package de.lukweb.timetablebot.telegram.commands;
 
 import de.lukweb.timetablebot.config.TimetableBotConfig;
+import de.lukweb.timetablebot.telegram.MessageCallback;
 import de.lukweb.timetablebot.telegram.TelegramBot;
 import de.lukweb.timetablebot.telegram.TelegramUser;
 import de.lukweb.timetablebot.utils.NetUtils;
@@ -31,15 +32,15 @@ public class VerifyC extends TelegramCommand {
         final String[] datas = {null, null}; // username, password
 
         TelegramBot.get().setCallback(message.getChatId(), newMessage -> {
-            if (!newMessage.hasText()) return false;
+            if (!newMessage.hasText()) return MessageCallback.RESUME;
             if (datas[0] == null || datas[0].trim().isEmpty()) {
                 datas[0] = newMessage.getText();
                 user.messages().send("Gebe nun das *Passwort* ein:");
-                return false;
+                return MessageCallback.RESUME;
             } else {
                 datas[1] = newMessage.getText();
                 scheduleTask(() -> checkData(user, datas));
-                return true;
+                return MessageCallback.FINISHED;
             }
         });
     }

@@ -42,6 +42,10 @@ public abstract class TelegramCommand {
         ThreadUtils.schedule(runnable);
     }
 
+    protected void hideFromShortHelp() {
+        shortHelp = null;
+    }
+
     public String getCommand() {
         return command;
     }

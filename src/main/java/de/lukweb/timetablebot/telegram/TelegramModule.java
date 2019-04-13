@@ -33,6 +33,7 @@ public class TelegramModule extends BotModule {
     @Override
     public List<TelegramCommand> commands() {
         return Arrays.asList(
+                new DeleteEverythingC(),
                 new HelpC(moduleLoader),
                 new ListCMDsC(moduleLoader),
                 new PanicC(),

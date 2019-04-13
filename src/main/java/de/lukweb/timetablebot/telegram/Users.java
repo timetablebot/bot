@@ -20,6 +20,10 @@ public class Users {
         users.put(user.getChatid(), user);
     }
 
+    public static void remove(TelegramUser user) {
+        users.remove(user.getChatid());
+    }
+
     public static TelegramUser get(long chatid) {
         return users.get(chatid);
     }

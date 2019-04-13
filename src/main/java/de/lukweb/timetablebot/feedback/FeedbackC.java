@@ -1,10 +1,7 @@
 package de.lukweb.timetablebot.feedback;
 
 import de.lukweb.timetablebot.sql.DB;
-import de.lukweb.timetablebot.telegram.TelegramBot;
-import de.lukweb.timetablebot.telegram.TelegramRank;
-import de.lukweb.timetablebot.telegram.TelegramUser;
-import de.lukweb.timetablebot.telegram.Users;
+import de.lukweb.timetablebot.telegram.*;
 import de.lukweb.timetablebot.telegram.commands.TelegramCommand;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -19,7 +16,7 @@ public class FeedbackC extends TelegramCommand {
     public void run(Message message, TelegramUser user) {
         user.messages().send("Sende nun dein Feedback!");
         TelegramBot.get().setCallback(message.getChatId(), callback -> {
-            if (!callback.hasText()) return false;
+            if (!callback.hasText()) return MessageCallback.RESUME;
 
             String feedbackText = callback.getText();
 
@@ -28,7 +25,7 @@ public class FeedbackC extends TelegramCommand {
 
             scheduleTask(() -> informAdmins(user, feedbackText));
 
-            return true;
+            return MessageCallback.FINISHED;
         });
     }
 

@@ -10,4 +10,7 @@ public interface MessageCallback {
      */
     boolean execute(Message message);
 
+    boolean FINISHED = true;
+    boolean RESUME = false;
+
 }
