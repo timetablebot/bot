@@ -2,7 +2,6 @@
 language: java
 jdk:
   - oraclejdk11
-  - oraclejdk12
   - openjdk11
   - openjdk12
 
@@ -22,6 +21,7 @@ notifications:
 # https://docs.travis-ci.com/user/deployment/releases/
 deploy:
   provider: releases
+  # https://docs.travis-ci.com/user/best-practices-security/
   api_key: "GITHUB OAUTH TOKEN"
   file: build.tar
   skip_cleanup: true
