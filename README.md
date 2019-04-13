@@ -39,7 +39,7 @@ curl -LO https://raw.githubusercontent.com/stundenplanbot/bot/master/docker-comp
 mkdir config && cd config/
 # Download the default configuration
 curl -LO https://raw.githubusercontent.com/stundenplanbot/bot/master/config/example.docker-compse.config.ini
-# Copies the configuration if non exists
+# Copies the configuration if it's non-existent
 cp -n example.docker-compse.config.ini config.ini
 ```
 4. Edit the configuration 
@@ -70,6 +70,7 @@ You can also get this list by running `/helpcmd`.
 If you don't have administrative rights the list may be shorter.
 
 * `/broadcast` - (ADMIN) Send a message to all of your users
+* `/deletedata` - Deletes all of the users data
 * `/feedback` - Allows users to voice their feedback
 * `/grade` - Changes your grade, so that you only get the correct timetable changes
 * `/help` - Shows a help menu and a description
