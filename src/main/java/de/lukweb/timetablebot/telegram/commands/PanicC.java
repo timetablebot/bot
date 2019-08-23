@@ -19,7 +19,7 @@ public class PanicC extends TelegramCommand {
         new Thread(() -> {
             try {
                 Thread.sleep(1000 * 60 * 2);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
             System.exit(5);
         }).start();
