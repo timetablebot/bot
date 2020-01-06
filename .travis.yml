@@ -2,7 +2,10 @@ language: java
 jdk:
   - oraclejdk11
   - openjdk11
+  - oraclejdk12
   - openjdk12
+  - oraclejdk13
+  - openjdk13
 
 # https://docs.travis-ci.com/user/job-lifecycle/#customizing-the-build-phase
 script:
