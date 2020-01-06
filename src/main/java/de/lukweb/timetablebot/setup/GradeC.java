@@ -23,7 +23,7 @@ public class GradeC extends TelegramCommand {
             if (!newMsg.hasText()) return MessageCallback.RESUME;
 
             SetupState state = store.handle(user, newMsg.getText());
-            return state.equals(SetupState.FINISH) || state.equals(SetupState.INVAILD);
+            return state.equals(SetupState.FINISH) || state.equals(SetupState.INVALID);
         });
     }
 

@@ -1,6 +1,7 @@
 package de.lukweb.timetablebot.timetable.repres;
 
 import de.lukweb.timetablebot.telegram.TelegramUser;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -22,10 +23,10 @@ public class Amendment {
     private GradeRange grade;
     private String room;
     private String writtenBy;
-    private String addtionalInformation;
+    private String additionalInformation;
 
     public Amendment(AmendmentType type, long date, String lesson, String teacher, String subject,
-                     String replacementTeacher, GradeRange grade, String room, String writtenBy, String addtionalInformation) {
+                     String replacementTeacher, GradeRange grade, String room, String writtenBy, String additionalInformation) {
         this.type = type;
         this.date = date;
         this.lesson = lesson;
@@ -35,7 +36,7 @@ public class Amendment {
         this.grade = grade;
         this.room = room;
         this.writtenBy = writtenBy;
-        this.addtionalInformation = addtionalInformation.replaceAll("\\n", "").replaceAll("\\r", "");
+        this.additionalInformation = additionalInformation.replaceAll("\\n", "").replaceAll("\\r", "");
     }
 
     public AmendmentType getType() {
@@ -74,8 +75,8 @@ public class Amendment {
         return writtenBy;
     }
 
-    public String getAddtionalInformation() {
-        return addtionalInformation;
+    public String getAdditionalInformation() {
+        return additionalInformation;
     }
 
     public long getDate() {
@@ -90,8 +91,18 @@ public class Amendment {
                 user.getTeachers().contains(teacher.toLowerCase());
     }
 
-    public void send(TelegramUser user) {
-        user.messages().send(buildMessage());
+    public void send(TelegramUser user, Notification type) {
+        switch (type) {
+            case NEW:
+                user.messages().send(buildMessage());
+                break;
+            case DELETE:
+                user.messages().send(buildRemove());
+                break;
+            default:
+                LoggerFactory.getLogger(getClass()).warn("There's no message for Amendment.Notifcation." + type.name());
+                break;
+        }
     }
 
     private String buildMessage() {
@@ -107,18 +118,14 @@ public class Amendment {
                 "Fach: " + getSubject() + "\n" +
                 "Raum: " + getRoom() + "\n";
 
-        if (getAddtionalInformation().trim().length() > 1) {
-            message += "Zusätzliche Informationen: " + getAddtionalInformation() + "\n";
+        if (getAdditionalInformation().trim().length() > 1) {
+            message += "Zusätzliche Informationen: " + getAdditionalInformation() + "\n";
         }
 
         GradeRange grade = getGrade();
         message += "Dies gilt für " + grade.translate();
 
         return message;
-    }
-
-    public void sendRemove(TelegramUser user) {
-        user.messages().send(buildRemove());
     }
 
     private String buildRemove() {
@@ -129,8 +136,8 @@ public class Amendment {
                 "Typ: " + type.getFullName() + "\n" +
                 "Lehrer: " + teacher + "\n";
 
-        if (getAddtionalInformation().trim().length() > 1) {
-            message += "Informationen: " + addtionalInformation + "\n";
+        if (getAdditionalInformation().trim().length() > 1) {
+            message += "Informationen: " + additionalInformation + "\n";
         }
 
         message += "wurde vom Vertretungsplan *entfernt*!";
@@ -153,7 +160,7 @@ public class Amendment {
         if (!replacementTeacher.equals(amendment.replacementTeacher)) return false;
         if (!grade.equals(amendment.grade)) return false;
         if (!room.equals(amendment.room)) return false;
-        return addtionalInformation.equals(amendment.addtionalInformation);
+        return additionalInformation.equals(amendment.additionalInformation);
     }
 
     @Override
@@ -166,7 +173,7 @@ public class Amendment {
         result = 31 * result + replacementTeacher.hashCode();
         result = 31 * result + grade.hashCode();
         result = 31 * result + room.hashCode();
-        result = 31 * result + addtionalInformation.hashCode();
+        result = 31 * result + additionalInformation.hashCode();
         return result;
     }
 
@@ -182,7 +189,12 @@ public class Amendment {
                 ", grade=" + grade +
                 ", room='" + room + '\'' +
                 ", writtenBy='" + writtenBy + '\'' +
-                ", addtionalInformation='" + addtionalInformation + '\'' +
+                ", additionalInformation='" + additionalInformation + '\'' +
                 '}';
+    }
+
+    public enum Notification {
+        NEW,
+        DELETE,
     }
 }

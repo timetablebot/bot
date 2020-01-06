@@ -32,16 +32,10 @@ public class Users {
         return new ArrayList<>(users.values());
     }
 
-    public static void notify(Amendment amendment, boolean remove) {
+    public static void notify(Amendment amendment, Amendment.Notification type) {
         users.values().stream()
                 .filter(amendment::fits)
-                .forEach(user -> {
-                    if (remove) {
-                        amendment.sendRemove(user);
-                    } else {
-                        amendment.send(user);
-                    }
-                });
+                .forEach(user -> amendment.send(user, type));
     }
 
 }

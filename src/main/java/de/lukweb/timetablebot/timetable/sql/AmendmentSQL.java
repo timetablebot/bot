@@ -33,7 +33,7 @@ public class AmendmentSQL {
                 .setReplacementTeacher(rs.getString("replacement"))
                 .setGrade(new GradeRange(rs.getString("grade")))
                 .setRoom(rs.getString("room")).setWrittenBy("")
-                .setAddtionalInformation(rs.getString("addtional_information"))
+                .setAdditionalInformation(rs.getString("addtional_information"))
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class AmendmentSQL {
                         "  addtional_information = ?",
                 amendment.getType().name(), amendment.getDate(), amendment.getLesson(), amendment.getTeacher(),
                 amendment.getSubject(), amendment.getReplacementTeacher(), amendment.getGrade().toString(),
-                amendment.getRoom(), amendment.getAddtionalInformation()
+                amendment.getRoom(), amendment.getAdditionalInformation()
         ).mapTo(Integer.class).findFirst();
 
         return count.isPresent() && count.get() > 0;
@@ -65,7 +65,7 @@ public class AmendmentSQL {
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ",
                 amendment.getType().name(), amendment.getDate(), amendment.getLesson(), amendment.getTeacher(),
                 amendment.getSubject(), amendment.getReplacementTeacher(), amendment.getGrade().toString(),
-                amendment.getRoom(), amendment.getAddtionalInformation()
+                amendment.getRoom(), amendment.getAdditionalInformation()
         );
     }
 
@@ -83,7 +83,7 @@ public class AmendmentSQL {
                         "  addtional_information = ?",
                 amendment.getType().name(), amendment.getDate(), amendment.getLesson(), amendment.getTeacher(),
                 amendment.getSubject(), amendment.getReplacementTeacher(), amendment.getGrade().toString(),
-                amendment.getRoom(), amendment.getAddtionalInformation()
+                amendment.getRoom(), amendment.getAdditionalInformation()
         );
     }
 

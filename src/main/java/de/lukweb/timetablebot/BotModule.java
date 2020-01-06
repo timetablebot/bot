@@ -19,7 +19,7 @@ public abstract class BotModule {
     protected String name;
     protected Logger logger;
     private long schedulerPeriod;
-    private long scheudlerDelay;
+    private long schedulerDelay;
     private int schedulerThreads;
     private ScheduledThreadPoolExecutor executor;
 
@@ -27,7 +27,7 @@ public abstract class BotModule {
         name = "";
         logger = LoggerFactory.getLogger(getClass());
         schedulerPeriod = TimeUnit.MINUTES.toMillis(30);
-        scheudlerDelay = 0;
+        schedulerDelay = 0;
         schedulerThreads = 1;
     }
 
@@ -35,8 +35,8 @@ public abstract class BotModule {
         schedulerPeriod = unit.toMillis(period);
     }
 
-    protected void setScheudlerDelay(long delay, TimeUnit unit) {
-        scheudlerDelay = unit.toMillis(delay);
+    protected void setSchedulerDelay(long delay, TimeUnit unit) {
+        schedulerDelay = unit.toMillis(delay);
     }
 
     protected void setSchedulerThreads(int schedulerThreads) {
@@ -46,7 +46,7 @@ public abstract class BotModule {
         }
     }
 
-    public List<Runnable> startScheudler(ScheduledExecutorService taskTerminator) {
+    public List<Runnable> startScheduler(ScheduledExecutorService taskTerminator) {
         List<Runnable> tasks = tasks();
         if (tasks.isEmpty()) {
             return tasks;
@@ -66,7 +66,7 @@ public abstract class BotModule {
                 }, 5, TimeUnit.MINUTES);
             };
 
-            executor.scheduleAtFixedRate(wrappedTask, scheudlerDelay, schedulerPeriod, TimeUnit.MILLISECONDS);
+            executor.scheduleAtFixedRate(wrappedTask, schedulerDelay, schedulerPeriod, TimeUnit.MILLISECONDS);
         }
 
         return tasks;

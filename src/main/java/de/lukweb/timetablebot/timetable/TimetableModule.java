@@ -17,7 +17,7 @@ public class TimetableModule extends BotModule {
         setSchedulerPeriod(5, TimeUnit.MINUTES);
 
         if (!getConfig().isInstantRun()) {
-            setScheudlerDelay(delayForFiveMinutes(), TimeUnit.MILLISECONDS);
+            setSchedulerDelay(delayForFiveMinutes(), TimeUnit.MILLISECONDS);
         }
     }
 

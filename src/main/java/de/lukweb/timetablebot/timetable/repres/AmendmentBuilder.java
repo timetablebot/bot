@@ -11,7 +11,7 @@ public class AmendmentBuilder {
     private GradeRange grade;
     private String room;
     private String writtenBy;
-    private String addtionalInformation;
+    private String additionalInformation;
 
     public AmendmentBuilder setType(AmendmentType type) {
         this.type = type;
@@ -58,14 +58,14 @@ public class AmendmentBuilder {
         return this;
     }
 
-    public AmendmentBuilder setAddtionalInformation(String addtionalInformation) {
-        this.addtionalInformation = addtionalInformation;
+    public AmendmentBuilder setAdditionalInformation(String additionalInformation) {
+        this.additionalInformation = additionalInformation;
         return this;
     }
 
     public Amendment build() {
         return new Amendment(type, date, lesson, teacher, subject, replacementTeacher, grade, room, writtenBy,
-                addtionalInformation);
+                additionalInformation);
     }
 
     public AmendmentBuilder copy() {
@@ -79,7 +79,7 @@ public class AmendmentBuilder {
         other.grade = this.grade;
         other.room = this.room;
         other.writtenBy = this.writtenBy;
-        other.addtionalInformation = this.addtionalInformation;
+        other.additionalInformation = this.additionalInformation;
         return other;
     }
 

@@ -5,6 +5,7 @@ import de.lukweb.timetablebot.TimetableBot;
 import de.lukweb.timetablebot.sql.DB;
 import de.lukweb.timetablebot.telegram.TelegramUser;
 import de.lukweb.timetablebot.timetable.TimetableRunnable;
+import de.lukweb.timetablebot.timetable.repres.Amendment;
 import de.lukweb.timetablebot.timetable.sql.TeachersSQL;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
@@ -236,7 +237,7 @@ public class UserSetup {
         if (ttRunable != null) {
             ttRunable.getCachedAmendments().stream()
                     .filter(amendment -> amendment.fits(user))
-                    .forEach(amendment -> amendment.send(user));
+                    .forEach(amendment -> amendment.send(user, Amendment.Notification.NEW));
         }
     }
 

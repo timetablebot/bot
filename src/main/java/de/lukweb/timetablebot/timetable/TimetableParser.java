@@ -105,7 +105,7 @@ public class TimetableParser extends SvplanParser {
                 .setGrade(grade)
                 .setRoom(tds.text(6))
                 .setWrittenBy(tds.text(7))
-                .setAddtionalInformation(tds.text(8))
+                .setAdditionalInformation(tds.text(8))
                 .setDate(date);
 
         return builder.build();
@@ -114,7 +114,7 @@ public class TimetableParser extends SvplanParser {
     private AmendmentType getAmendmentType(String text) {
         AmendmentType type = AmendmentType.getByName(text);
         if (type == null) {
-            logger.warn("There is an undefinded AmendmentType: {}", text);
+            logger.warn("There is an undefined AmendmentType: {}", text);
             type = AmendmentType.UNDEFINDED;
         }
         return type;

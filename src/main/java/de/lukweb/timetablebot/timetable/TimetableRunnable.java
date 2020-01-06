@@ -117,13 +117,9 @@ public class TimetableRunnable implements Runnable, Stoppable {
         });
 
         // Sending all changes to users
-        newAme.forEach(a -> telegramExecutorService.execute(() -> Users.notify(a, false)));
-        // removedAme.forEach(a -> telegramExecutorService.execute(() -> Users.notify(a, true)));
+        newAme.forEach(a -> telegramExecutorService.execute(() -> Users.notify(a, Amendment.Notification.NEW)));
+        removedAme.forEach(a -> telegramExecutorService.execute(() -> Users.notify(a, Amendment.Notification.DELETE)));
 
-        // TODO: Only send the review message if the day is today or in the future
-        // Send all removals to me for review
-        removedAme.forEach(amendment -> telegramExecutorService.execute(() ->
-                amendment.sendRemove(Users.get(154988148))));
         amendments.removeAll(removedAme);
 
         cleanupCache(startDate);

@@ -46,7 +46,7 @@ public class VerifyC extends TelegramCommand {
     }
 
     private void checkData(TelegramUser user, String[] datas) {
-        boolean auth = NetUtils.checkAuthenication(config.getTableBasePath() + "heute/subst_001.htm", datas[0], datas[1]);
+        boolean auth = NetUtils.checkAuthentication(config.getTableBasePath() + "heute/subst_001.htm", datas[0], datas[1]);
         if (auth) {
             user.setVerified(true);
             user.saveChanges();

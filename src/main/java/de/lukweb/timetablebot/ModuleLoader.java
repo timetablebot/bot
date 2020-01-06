@@ -126,7 +126,7 @@ public class ModuleLoader {
         // TODO: Maybe stop terminator
         taskTerminator = Executors.newScheduledThreadPool(2, new CatchingThreadFactory("task-terminator"));
         for (BotModule module : modules) {
-            List<Runnable> moduleRunnables = module.startScheudler(taskTerminator);
+            List<Runnable> moduleRunnables = module.startScheduler(taskTerminator);
 
             for (Runnable runnable : moduleRunnables) {
                 runnables.put(runnable.getClass(), runnable);

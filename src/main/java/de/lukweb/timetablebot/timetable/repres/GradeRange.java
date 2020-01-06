@@ -33,7 +33,7 @@ public class GradeRange {
             grades.add(12);
             return;
         } else if (ignore.contains(gradeStr.toLowerCase())) {
-            // We ignore grades which adress the whole school
+            // We ignore grades which are meant to address the whole school
             return;
         }
 
@@ -76,7 +76,7 @@ public class GradeRange {
     }
 
     /**
-     * Gets whether an error during the parsing occured
+     * Gets whether an error during the parsing occurred
      *
      * @return Whether there was a error
      */

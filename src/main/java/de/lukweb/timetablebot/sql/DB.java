@@ -26,6 +26,7 @@ public class DB {
     }
 
     private static void setupTables() {
+        // TODO: Fix the incorrect spelling of 'addtional_information' in the database
         jdbi.useHandle(handle -> {
             handle.execute("CREATE TABLE IF NOT EXISTS `teachers` ( " +
                     "  `id` int(11) NOT NULL AUTO_INCREMENT, " +

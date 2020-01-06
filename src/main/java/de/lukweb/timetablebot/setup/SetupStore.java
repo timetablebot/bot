@@ -40,7 +40,7 @@ public class SetupStore {
 
         if (setup == null) {
             new UserSetup(user).invalidState();
-            return SetupState.INVAILD;
+            return SetupState.INVALID;
         }
 
         switch (setup.getState()) {

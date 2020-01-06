@@ -2,7 +2,7 @@ package de.lukweb.timetablebot.setup;
 
 public enum SetupState {
 
-    INVAILD,
+    INVALID,
     START,
     GRADE,
     CLASS,
