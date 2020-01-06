@@ -6,7 +6,7 @@
 
     <groupId>de.lukweb</groupId>
     <artifactId>TimetableBot</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.4.0</version>
 
     <properties>
         <log4j.version>2.13.0</log4j.version>
