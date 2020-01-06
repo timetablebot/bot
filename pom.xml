@@ -18,39 +18,6 @@
 
     <build>
         <plugins>
-            <!-- Assembly Plugin -->
-            <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <appendAssemblyId>true</appendAssemblyId>
-                    <finalName>${project.artifactId}</finalName>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>de.lukweb.timetablebot.TimetableBot</mainClass>
-                        </manifest>
-                    </archive>
-                    <minimizeJar>true</minimizeJar>
-                    <artifactSet>
-                        <excludes>
-                            <exclude>org.glassfish:*</exclude>
-                        </excludes>
-                    </artifactSet>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>assemble</id>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                </executions>
-            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -74,6 +41,16 @@
                     <target>11</target>
                 </configuration>
             </plugin>
+            <!--
+            ** Dependencies: **
+             Dependencies won't be included in the jar file.
+             Instead they should be uploaded in a folder next to the jar file called 'libraries/'.
+             To get all jar files of every library, use 'mvn dependency:copy-dependencies'.
+             Now you can find all files in the directory 'target/dependency/'
+            ** Updates: **
+             To check whether there are any updates the libraries used in this project,
+             run 'mvn versions:display-dependency-updates'.
+            -->
         </plugins>
     </build>
 
