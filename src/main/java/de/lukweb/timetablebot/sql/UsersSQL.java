@@ -39,7 +39,7 @@ public class UsersSQL {
     public void insert(TelegramUser user) {
         long timestamp = System.currentTimeMillis() / 1000;
         handle.execute(
-                "INSERT INTO users (chatid, blocked, disabled, verified, rank, grade, classChar, name, created, updated) " +
+                "INSERT INTO users (chatid, blocked, disabled, verified, `rank`, grade, classChar, name, created, updated) " +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getChatid(),
                 user.isBlocked(),
@@ -57,7 +57,7 @@ public class UsersSQL {
 
     public void update(TelegramUser user) {
         handle.execute(
-                "UPDATE users SET blocked = ?, disabled = ?, verified = ?, rank = ?, grade = ?, classChar = ?, name = ?, updated = ? " +
+                "UPDATE users SET blocked = ?, disabled = ?, verified = ?, `rank` = ?, grade = ?, classChar = ?, name = ?, updated = ? " +
                         "WHERE chatid = ?",
                 user.isBlocked(),
                 user.isDisabled(),

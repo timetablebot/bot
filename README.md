@@ -96,7 +96,7 @@ Login into your mysql server with the credentials given in your `docker-compose.
 *Start here if you installed MySQL or MariaDB by yourself and login into your SQL server*
 1. Show all users using `SELECT * FROM users;`. 
 2. Search for your Telegram name (column `name`) and write down the `chatid`
-3. Run `UPDATE users SET rank = 'ADMIN' WHERE chatid = [INSERT YOUR CHATID HERE];`
+3. Run ``UPDATE users SET `rank` = 'ADMIN' WHERE chatid = [INSERT YOUR CHATID HERE];``
 4. Now you've got admin rights. Check the result with `SELECT * FROM users;`. You `rank` should be `ADMIN`.
 5. Restart the bot. If your running it via docker you can use `docker-compose restart ttbot`.
 
