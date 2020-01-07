@@ -3,7 +3,7 @@
 
 # https://hub.docker.com/_/maven
 # Using a base image, so we don't have to download the maven libraries multiple times
-FROM maven:3-jdk-12-alpine as mavenBase
+FROM maven:3-jdk-13-alpine as mavenBase
 WORKDIR /build/timetablebot/
 
 COPY pom.xml .
@@ -13,7 +13,7 @@ RUN mvn dependency:go-offline
 RUN mvn package
 
 # https://hub.docker.com/_/maven
-FROM maven:3-jdk-12-alpine as maven
+FROM maven:3-jdk-13-alpine as maven
 WORKDIR /build/timetablebot/
 
 COPY --from=mavenBase /root/.m2 /root/.m2
@@ -27,7 +27,7 @@ RUN mvn dependency:copy-dependencies -DincludeScope=runtime -DexcludeGroupIds=or
 FROM adoptopenjdk/openjdk11-openj9:alpine-jre
 
 COPY --from=maven /build/timetablebot/target/dependency /timetablebot/libraries
-COPY --from=maven /build/timetablebot/target/TimetableBot-1.0-SNAPSHOT.jar /timetablebot/bot.jar
+COPY --from=maven /build/timetablebot/target/TimetableBot*.jar /timetablebot/bot.jar
 
 VOLUME /timetablebot/config
 
