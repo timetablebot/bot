@@ -34,12 +34,16 @@ insert your telegram name and token and add a Base64 authentication for the time
 ```bash
 # Create a new directory 
 mkdir timetablebot && cd timetablebot/
+
 # Download the docker-compose.yml
 curl -LO https://raw.githubusercontent.com/stundenplanbot/bot/master/docker-compose.yml
+
 # Create a new directory for the configuration
 mkdir config && cd config/
+
 # Download the default configuration
 curl -LO https://raw.githubusercontent.com/stundenplanbot/bot/master/config/example.docker-compse.config.ini
+
 # Copies the configuration if it's non-existent
 cp -n example.docker-compse.config.ini config.ini
 ```
