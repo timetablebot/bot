@@ -19,6 +19,8 @@ before_deploy:
   - cd deploy
   - tar -cvf package.tar timetablebot.jar libraries
   - pwd && ls -lah
+  - cd ..
+  - cp ./deploy/package.tar .
 
 # https://docs.travis-ci.com/user/notifications/
 notifications:
@@ -32,7 +34,7 @@ deploy:
   # https://docs.travis-ci.com/user/best-practices-security/
   api_key:
     secure: Yk2tfA5kopGUpBc1k+pmCjEeyah95UvRmtR8t/oV9ZWzfzyF4KOZqg7zLlWFtDd2t3z8lCAKXsD52QIv2SHWKS9j3ZimTh91CRyx3miy8uc8TT2QzoLdXrwNJRvylrZ/IL1pdmgoYTpkxau+6e8RsxP+e0AbYV3cI4tztN35dwxjlTcDr8mF63a6wuEVeMoocpiLjZOiYI4luzM2F21W7za0hUYa8dfrgGVb0xvZO8/Zm/HfXSajmqGGQ3EgxsToxe88EBq+6ufrn/NLQ82C4Ig6+NwPDL/BjM7dvY2PIeUWsajJRfgJnsyKWE3WrDH84VsvfYXmmFHQp5XHJrOGJjeyM5z4eZSXia6XATjLfTkM9U7bdan4s9GC/mYCLbTJBWVAc2CoeRYxFhcTrHUT6/G04p1PiV5zlFNnCVJ3oje5hbwc8RvFghK2gsrJwihBSI/gnb7zr/TUlC7ZP64h+6RAPf4g1hCuKWfDsptYWwJptVzXxZ6qj/EJvN5seNzy5TjGjhwgF2RnSQpCso48M4KqxNKDo2Kqf30gWh9gC1m0unh8n0cSvJ4HuNGL6xtq5AllZ9vf6/7KaozCqpMNAKYApC4+YXpdzuZKAuoCtQltqGT0fkOToK6UdVCjfIk2t9+0I+TtTNm/IRAfN9FaD9LwCBtd+khhfFaFAIzP4IQ=
-  file: deploy/package.tar
+  file: package.tar
   skip_cleanup: true
   draft: true
   on:
