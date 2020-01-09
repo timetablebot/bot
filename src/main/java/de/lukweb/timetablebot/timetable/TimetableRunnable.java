@@ -66,13 +66,6 @@ public class TimetableRunnable implements Runnable, Stoppable {
             return;
         }
 
-        // Alert the admin if there are fewer amendments; should be only once per day
-        if (currAme.size() < ameCountBefore) {
-            telegramExecutorService.execute(() -> {
-                String message = "Fewer amendments than before " + ameCountBefore + " -> " + currAme.size();
-                Users.get(154988148).messages().send(message);
-            });
-        }
         ameCountBefore = currAme.size();
 
         // Figure out the start date to load missing amendments
