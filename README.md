@@ -5,6 +5,11 @@ This application sends changes of your timetable as a [Telegram](https://telegra
 It works with [Untis](https://www.untis.at) and currently all strings are hardcoded in German, 
 but feel free to change the software according to your needs.
 
+## End of life
+
+This application has the reached the end of its life as it is no longer actively being used in production.
+If you're searching for an alternative, I recommend checking out the [substitution-schedule-parser](https://github.com/vertretungsplanme/substitution-schedule-parser).
+
 ## Installation
 
 First you have to get Telegram bot name and token.
